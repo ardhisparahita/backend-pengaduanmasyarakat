@@ -5,6 +5,7 @@ import helmet from "helmet"
 import MasyarakatRoutes from "./routes/MasyarakatRoutes"
 import OfficerRoutes from "./routes/OfficerRoutes"
 import ComplaintRoutes from "./routes/ComplaintRoutes"
+import ResponseRoutes from "./routes/ResponseRoutes"
 
 class App {
   public app: Application
@@ -26,6 +27,7 @@ class App {
     this.app.use("/api/v1/masyarakat", MasyarakatRoutes)
     this.app.use("/api/v1/officer", OfficerRoutes)
     this.app.use("/api/v1/complaint", ComplaintRoutes)
+    this.app.use("/api/v1/response", ResponseRoutes)
   }
 }
 

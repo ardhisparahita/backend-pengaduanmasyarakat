@@ -6,28 +6,22 @@ const db = require("./../db/models")
 
 class ComplaintController implements IController {
   async index(req: Request, res: Response): Promise<Response> {
-    const data = await db.complaint.findAll({
-      include: [{
-        model: db.masyarakat,
-        as: "masyarakats",
-    }],
-    })
+    const data = await db.response.findAll()
     return res.json({
-      messages: "all complaint",
+      messages: "all response",
       data
     })
   }
 
   async create(req: Request, res: Response): Promise<Response> {
-    const {id_pengaduan, tgl_pengaduan, nik, isi_laporan, foto, status} = req.body
+    const {id_tanggapan, id_pengaduan, tgl_pengaduan, tanggapan, id_petugas} = req.body
 
-    const response = await db.complaint.create({
-      id_pengaduan,
-      tgl_pengaduan,
-      nik,
-      isi_laporan,
-      foto,
-      status
+    const response = await db.response.create({
+     id_tanggapan,
+     id_pengaduan,
+     tgl_pengaduan,
+     tanggapan,
+     id_petugas
     })
     return res.json({
       messages: "create successfully!",
@@ -38,34 +32,33 @@ class ComplaintController implements IController {
   async show(req: Request, res: Response): Promise<Response> {
     const {id} = req.params
 
-    const data = await db.complaint.findOne({
+    const data = await db.response.findOne({
       where: {
         id
       }
     })
     return res.json({
-      messages: "get one complaint",
+      messages: "get one response",
       data
     })
   }
 
   async update(req: Request, res: Response): Promise<Response> {
     const {id} = req.params
-    const {id_pengaduan, tgl_pengaduan, nik, isi_laporan, foto, status} = req.body
+    const {id_tanggapan, id_pengaduan, tgl_pengaduan, tanggapan, id_petugas} = req.body
 
-    await db.complaint.update({
-      id_pengaduan,
-      tgl_pengaduan,
-      nik,
-      isi_laporan,
-      foto,
-      status
+    await db.response.update({
+     id_tanggapan,
+     id_pengaduan,
+     tgl_pengaduan,
+     tanggapan,
+     id_petugas
     }, {
       where: {
         id
       }
     })
-    const data = await db.complaint.findOne({
+    const data = await db.response.findOne({
       where: {
         id
       }
@@ -79,7 +72,7 @@ class ComplaintController implements IController {
   async delete(req: Request, res: Response): Promise<Response> {
     const {id} = req.params
 
-    await db.complaint.destroy({
+    await db.response.destroy({
       where: {
         id
       }
